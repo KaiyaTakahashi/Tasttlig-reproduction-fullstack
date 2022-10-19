@@ -1,0 +1,755 @@
+#window {
+    width: 100%;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+}
+
+#top-banner {
+    background-color: white;
+    font-size: 15px;
+    color: black;
+    height: 30px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 0px 2px 0px rgb(176, 176, 176);
+}
+
+#top-banner-texts {
+    color: black;
+}
+
+#logo-image {
+    top: auto;
+    left: auto;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    max-height: 80px;
+    min-width: auto;
+    cursor: pointer;
+}
+
+#become-host-image-frame {
+    width: 100%;
+    height: 400px;
+    background-image: url('/Users/kaiyatakahashi/Desktop/my-first-project/src/images/banner.jpg');
+    background-size: 100%;
+    background-position: center;
+}
+
+#become-host-image {
+    width: 100%;
+    height: auto;
+}
+
+header {
+    background-color: #ffffff;
+    min-height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+}
+
+.black-title {
+    font-weight: 200;
+    color: white;
+    background-color: black;
+    padding: 5px 5px 5px 5px;
+    width: auto;
+    height: auto;
+    font-size: large;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.title-with-line {
+    font-size: 20px; 
+    font-weight: 400;
+    color: rgb(60, 60, 60);
+ }
+ 
+ .title-with-line::after {
+     content: '';
+     display: flex;
+     flex-direction: column;
+     width: 200px;
+     height: 1px;
+     background:rgb(223, 223, 223);
+     margin-top: 10px;
+     opacity: 1;
+ }
+
+#make-money-title {
+    font-weight: 300;
+    background-color: white;
+    width: auto;
+    height: auto;
+    font-size: 40px;
+}
+
+.img-with-shadow {
+    width: 90%;
+    height: auto;
+    max-height: 350px;
+    max-width: 520px;
+    box-shadow: 1px 1px 1px 1px rgb(223, 223, 223);
+}
+
+#become-a-host-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+#become-a-host-grid {
+    margin-left: 10px;
+    margin-right: 10px;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    column-gap: 5px;
+    row-gap: 5px;
+    grid-template-rows: auto auto auto auto;
+    max-width: 1000px;
+}
+
+.image-in-grid {
+    width: 90%;
+    height: auto;
+    max-height: 350px;
+    max-width: 520px;
+    box-shadow: 1px 1px 1px 1px rgb(223, 223, 223);
+}
+
+.block {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#run-your-tittle {
+    width: 300px;
+}
+
+#bottom-image {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    width: 90%;
+    max-width: 900px;
+    height: auto;
+}
+
+p {
+    color: #858585;
+}
+
+ul {
+    color: #858585;
+}
+
+#host-information-flex {
+    margin-left: 20px;
+    margin-right: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#host-information-items-flex {
+    display: flex;
+    flex-direction: row;
+    text-align: start;
+    column-gap: 20px;
+    max-width: 1000px;
+    margin-bottom: 30px;
+}
+
+.host-information-item {
+    min-width: auto;
+}
+
+#question-view-container {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 500px;
+    grid-template-areas: 
+        "a"
+    ;
+}
+
+#question-image {
+    grid-area: a;
+    background-image: url('/Users/kaiyatakahashi/Desktop/my-first-project/src/images/festivals.jpg');
+    width: 100%;
+    height: 500px;
+    opacity: 1;
+    background-size: 250%;
+    background-position: center;
+    box-shadow: 0px 0px 15px 0px rgb(158, 158, 158);
+}
+
+#question-box {
+    grid-area: a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: end;
+    padding-bottom: 50px;
+    z-index: 4;
+}
+
+#question-title {
+    background-color: white;
+    width: 70%;
+    max-width: 800px;
+}
+
+#question-prompt {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 60%;
+    height: 300px;
+    background-color: white;
+}
+
+#question-prompt-title {
+    font-size: 30px;
+    font-weight: 300;
+}
+
+#question-prompt-title::after {
+    content: '';
+    width: 400px;
+    height: 1px;
+    background:rgb(223, 223, 223);
+    margin: 0.5em auto 1em;
+    opacity: 1;
+}
+
+#footer-line::before {
+    content: '';
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 1px;
+    background:rgb(223, 223, 223);
+    margin: 0.5em auto 1em;
+    opacity: 1;
+    text-align: inherit;
+}
+
+#question-title-button-flex {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    column-gap: 30%;
+}
+
+#question-form-x-button {
+    background-color: white;
+    border: 0ch;
+    font-size: 30px;
+    color: #858585;
+}
+
+#question-form-container {
+    z-index: 3;
+    background-color: white;
+    padding-bottom: 10px;
+}
+
+#question-form-grid {
+    display: grid;
+    grid-template-areas: 
+    "a b"
+    "c b"
+    "d b"
+    "e b"
+    ;
+    column-gap: 20px;
+    row-gap: 30px;
+    padding: 10px 20px 10px 20px;
+    height: auto;
+    text-align: start;
+}
+
+.form-text-field {
+    min-width: 90%;
+    height: 30px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+
+#name-tf {
+    grid-area: a;
+    background-color: #ffffff;
+}
+#email-tf {
+    grid-area: c;
+}
+#phone-tf {
+    grid-area: d;
+}
+#interest-tf {
+    grid-area: e;
+}
+#other-tf {
+    grid-area: b;
+}
+
+#warning-text {
+    color: red;
+    margin: 0px 0px 0px 0px;
+    text-align: start;
+}
+
+#question-form-text {
+    font-size: 13px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.bigger-input {
+    height: 100px;
+}
+
+form {
+    width: 100%;
+}
+
+#send-button {
+    display: inline-block;
+    color: #fff;
+    background-color: rgb(29, 51, 173);
+    border: none;
+    padding: 15px 20px;
+    border-radius: 0;
+    cursor: pointer;
+    text-decoration: none;
+    font-family: inherit;
+    font-weight: bold;
+    box-shadow: 0px 3px rgb(11, 0, 73);
+}
+
+#send-button:hover {
+    background-color: rgb(53, 71, 174);
+    transition: 0.5s;
+}
+
+#question-form-image-view {
+    background-image: url('/Users/kaiyatakahashi/Desktop/my-first-project/src/images/festivals.jpg');
+    width: 100%;
+    height: auto;
+    background-size: 250%;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#question-form-box {
+    z-index: 4;
+    transform: translate(0%, 0%);
+    height: auto;
+    width: 90%;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: end;
+    padding-bottom: 50px;
+}
+
+@media (min-width: 1000px) {
+    header {
+        min-height: 3vh;
+        align-items: flex-start;
+    }
+    #tile-and-button {
+        z-index: 4;
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 380px;
+    }
+    #logo-image {
+      margin-left: 50px;
+      max-height: 50px;
+      margin-top: 35px;
+      margin-bottom: 10px;
+      min-width: auto;
+    }
+    #question-image {
+        height: 500px;
+    }
+
+    #question-prompt-title::after {
+        width: 300px;
+    }
+}
+
+@media (max-width: 900px) {
+    #question-form-grid {
+        display: inline;
+        height: auto;
+        text-align: center;
+    }
+
+    #question-form-container {
+        display: flex;
+        flex-direction: column;
+        max-width: 900px;
+        width: 90%;
+        align-items: center;
+    }
+
+    #warning-text {
+        margin: 0px 0px 0px 30px;
+    }
+}
+  
+@media (max-width: 750px) {
+    header {
+        align-items: center;
+        min-height: 3vh;
+    }
+
+    #logo-image {
+        max-height: 40px;
+        margin: 35px 0px 10px 0px;
+    }
+
+    #top-banner-texts {
+        font-size: 13px;
+    }
+
+    #make-money-title {
+        height: 50px;
+        font-size: 30px;
+    }
+
+    #become-host-image-frame {
+        width: 100%;
+        height: 400px;
+        background-image: url('/Users/kaiyatakahashi/Desktop/my-first-project/src/images/banner.jpg');
+        background-size: 120%;
+        background-position: center;
+    }
+
+    #become-a-host-grid {
+        min-width: 100%;
+        justify-items: center;
+        row-gap: 10px;
+        grid-template-columns: 100%;
+        grid-template-rows: repeat(auto-fit, minmax(10%, 1fr));
+    }
+
+    .block:nth-of-type(3) {
+        grid-row: 4;
+        grid-column: 1;
+    }
+
+    .block:nth-of-type(7) {
+        grid-row: 8;
+        grid-column: 1;
+    }
+
+    #question-prompt-title::after {
+        width: 300px;
+    }
+
+    #host-information-items-flex {
+        flex-direction: column;
+    }
+
+    #question-title-button-flex {
+        column-gap: 20%;
+    }
+}
+
+@media (max-width: 375px) {
+    #window {
+        width: 375px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    header {
+        align-items: center;
+        min-width: 40px;
+    }
+
+    #top-banner {
+        height: 30px;
+    }
+
+    #top-banner-texts {
+        font-size: 9px;
+    }
+
+    #logo-image {
+        max-height: 30px;
+        margin: 35px 0px 10px 0px;
+    }
+
+    #become-host-image-frame {
+        width: 100%;
+        height: 300px;
+        background-image: url('/Users/kaiyatakahashi/Desktop/my-first-project/src/images/banner.jpg');
+        background-size: 120%;
+        background-position: center;
+    }
+    
+    #become-host-image {
+        width: 100%;
+        height: auto;
+    }
+
+    #make-money-title {
+        margin-bottom: 50px;
+        width: 200px;
+    }
+
+    #tile-and-button {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #become-a-host-grid {
+        width: 375px;
+        row-gap: 10px;
+        grid-template-columns: 375px;
+        grid-template-rows: repeat(auto-fit, minmax(10%, 1fr));
+    }
+
+    .block {
+        margin-left: 5px;
+        margin-right: 5px;
+        width: 340px;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .block:nth-of-type(3) {
+        grid-row: 4;
+        grid-column: 1;
+    }
+
+    .block:nth-of-type(7) {
+        grid-row: 8;
+        grid-column: 1;
+    }
+
+    #host-information-items-flex {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    #host-information-flex {
+        max-width: 90%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #host-information-items-flex {
+        display: flex;
+        flex-direction: column;
+        text-align: start;
+        margin-bottom: 30px;
+    }
+
+    p {
+        max-width: 300px;
+    }
+
+    #question-view-container {
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-rows: 500px;
+        grid-template-areas: 
+            "a"
+        ;
+    }
+
+    .footer-p {
+        margin-left: 40px;
+    }
+
+    #question-title-button-flex {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        column-gap: 30px;
+    }
+
+    #question-form-grid {
+        display: flex;
+        flex-direction: column;
+        row-gap: 30px;
+        height: auto;
+    }
+
+    #question-prompt {
+        width: 85%;
+        background-color: white;
+    }
+
+    #question-form-container {
+        width: 100%;
+        padding-bottom: 20px;
+    }
+}
+
+@media (max-width: 390px) {
+    #window {
+        width: 390px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    header {
+        align-items: center;
+        min-width: 40px;
+    }
+
+    #top-banner {
+        height: 30px;
+    }
+
+    #top-banner-texts {
+        font-size: 9px;
+    }
+
+    #logo-image {
+        max-height: 30px;
+        margin: 35px 0px 10px 0px;
+    }
+
+    #become-host-image-frame {
+        width: 100%;
+        height: 300px;
+        background-image: url('/Users/kaiyatakahashi/Desktop/my-first-project/src/images/banner.jpg');
+        background-size: 120%;
+        background-position: center;
+    }
+    
+    #become-host-image {
+        width: 100%;
+        height: auto;
+    }
+
+    #make-money-title {
+        margin-bottom: 50px;
+        width: 200px;
+    }
+
+    #tile-and-button {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #become-a-host-grid {
+        width: 375px;
+        row-gap: 10px;
+        grid-template-columns: 375px;
+        grid-template-rows: repeat(auto-fit, minmax(10%, 1fr));
+    }
+
+    .block {
+        margin-left: 5px;
+        margin-right: 5px;
+        width: 340px;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .block:nth-of-type(3) {
+        grid-row: 4;
+        grid-column: 1;
+    }
+
+    .block:nth-of-type(7) {
+        grid-row: 8;
+        grid-column: 1;
+    }
+
+    #host-information-items-flex {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    #host-information-flex {
+        max-width: 90%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #host-information-items-flex {
+        display: flex;
+        flex-direction: column;
+        text-align: start;
+        margin-bottom: 30px;
+    }
+
+    p {
+        max-width: 300px;
+    }
+
+    #question-view-container {
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-rows: 500px;
+        grid-template-areas: 
+            "a"
+        ;
+    }
+
+    .footer-p {
+        margin-left: 40px;
+    }
+
+    #question-title-button-flex {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        column-gap: 30px;
+    }
+
+    #question-prompt {
+        width: 85%;
+        background-color: white;
+    }
+}

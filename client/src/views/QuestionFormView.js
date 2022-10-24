@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import Button from '../components/Button';
 import '../styling/style.css'
 import { useTransition, animated } from 'react-spring';
-import QuestionForm from '../models/QuestionForm.js'
 import WarningText from '../components/WarningText';
 import { useForm } from 'react-hook-form';
 import Axios from 'axios';
+
+Axios.defaults.withCredentials = true;
 
 const QuestionFormView = ({ open, onClose }) => {
     const [email, setEmail] = useState("");
     const [isEmailValid, setIsEmailValid] = useState(true);
 
     useEffect(() => {
-        Axios.get("http://localhost:3001/api/get").then((response) => {
+        Axios.get("http://localhost:3001/api/insert").then((response) => {
             console.log(response.data);
         });
     }, []);
@@ -26,11 +26,10 @@ const QuestionFormView = ({ open, onClose }) => {
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const onSubmit = data => {
-        //localStorage.setItem(data["email"] , JSON.stringify(data))
-        Axios.post('http://localhost:3001/api/insert/', {
-            userName: data["name"], 
-            userEmail: data["email"], 
-            userPhoneNumber: data["phone"], 
+        Axios.post('http://localhost:3001/api/insert', {
+            name: data["name"], 
+            email: data["email"], 
+            phone: data["phone"], 
             other: data["other"], 
             interest: data["interest"]
         }).then(() => {

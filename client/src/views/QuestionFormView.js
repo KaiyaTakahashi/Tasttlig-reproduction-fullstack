@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import '../styling/style.css'
 import { useTransition, animated } from 'react-spring';
 import WarningText from '../components/WarningText';
@@ -8,8 +8,6 @@ import Axios from 'axios';
 Axios.defaults.withCredentials = true;
 
 const QuestionFormView = ({ open, onClose }) => {
-    const [email, setEmail] = useState("");
-    const [isEmailValid, setIsEmailValid] = useState(true);
 
     useEffect(() => {
         Axios.get("http://localhost:3001/api/insert").then((response) => {
@@ -26,7 +24,7 @@ const QuestionFormView = ({ open, onClose }) => {
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const onSubmit = data => {
-        Axios.post('http://localhost:3001/api/insert', {
+        Axios.post('http://localhost:3001/api/questions', {
             name: data["name"], 
             email: data["email"], 
             phone: data["phone"], 
@@ -35,6 +33,12 @@ const QuestionFormView = ({ open, onClose }) => {
         }).then(() => {
             alert('successful insert');
         });
+        Axios.post('http://localhost:3001/api/members', {
+            name: data["name"],
+            email: data["email"]
+        }).then(() => {
+            alert('You are also signed in');
+        })
     };
 
     if (!open) {

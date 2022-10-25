@@ -38,7 +38,7 @@ const pool = new Pool({
     database: "first_tasttlig_project_db"
 });
 
-app.post("/api/insert", async(req, res) => {
+app.post("/api/questions", async(req, res) => {
     try {
         const name = req.body.name;
         const email = req.body.email;
@@ -61,11 +61,25 @@ app.post("/api/insert", async(req, res) => {
 app.get("/api/get", (req, res) => {
     const sqlSelect = 'SELECT * FROM question_form';
     pool.query(sqlSelect, (err, result)=> {
-        res.send(result);
+        res.send(result["rows"]);
     })
 })
 
+app.post('/api/members', (req, res) => {
+   const sqlInsert = 'INSERT INTO members (name, email, phone) VALUES ($1, $2, $3)';
+   const name = req.body.name;
+   const email = req.body.email;
+   pool.query(sqlInsert, [name, email, ""], (err, result) => {
+       res.send(result["rows"]);
+   });
+});
 
+app.get('/api/members', (req, res) => {
+    const sqlSelect = "SELECT * FROM members";
+    pool.query(sqlSelect, (err, result) => {
+        res.send(result["rows"]);
+    })
+})
 
 app.listen(3001, () => {
     console.log("running server");

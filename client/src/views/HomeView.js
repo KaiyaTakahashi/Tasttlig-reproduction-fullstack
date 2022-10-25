@@ -15,7 +15,7 @@ const HomeView = () => {
     config: { mass:1, tension:20, friction:0, clamp: true }
   })
   return (
-    <div>
+    <div id='window'>
         {transition((style, item) => 
           item ? <animated.header style={style} id='top-banner' onClick={() => {
             window.open('https://www.godaddy.com/en-ca/websites/website-builder?isc=pwugc&utm_source=wsb&utm_medium=applications&utm_campaign=en-us_corp_applications_banner&utm_content=b257bad9-cb54-4be5-a8b8-8a31b0bc94b3');

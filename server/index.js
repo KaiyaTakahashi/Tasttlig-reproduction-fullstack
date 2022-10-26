@@ -65,21 +65,61 @@ app.get("/api/get", (req, res) => {
     })
 })
 
-app.post('/api/members', (req, res) => {
-   const sqlInsert = 'INSERT INTO members (name, email, phone) VALUES ($1, $2, $3)';
-   const name = req.body.name;
-   const email = req.body.email;
-   pool.query(sqlInsert, [name, email, ""], (err, result) => {
-       res.send(result["rows"]);
-   });
+app.post('/api/register', (req, res) => {
+    const username = req.body.username;
+    const password = req.body.password;
+    const sqlInsert = "INSERT INTO users (username, password) VALUES ($1, $2)"
+    pool.query(sqlInsert, [username, password], (err, result) => {
+        if (err) {
+            console.log(err)
+        };
+        res.send(result);
+    });
 });
 
-app.get('/api/members', (req, res) => {
-    const sqlSelect = "SELECT * FROM members";
+app.get('/api/register', (req, res) => {
+    const sqlSelect = "SELECT * FROM users"
     pool.query(sqlSelect, (err, result) => {
-        res.send(result["rows"]);
+        res.send(result);
     })
-})
+});
+
+app.post('/api/login', (req, res) => {
+    const username = req.body.username;
+    const password = req.body.password;
+    // const sqlSelect = "SELECT * FROM users WHERE username = $1 AND password = $2";
+    const sqlSelect = "SELECT * FROM users";
+    pool.query(sqlSelect, (err, result) => {
+        // if (reuslt["rows"].length > 0) {
+        //     res.send(result);
+        // } else {
+        //     res.send({ message: "Wrong username/password combination"});
+        // }
+        // if (err) {
+        //     res.send({ err: err });
+        // }
+
+        var index = -1;
+        for (let i = 0; i < result["rows"].length; i++) {
+            if (result["rows"][i]["username"] === username && result["rows"][i]["password"] === password) {
+                index = i
+            }
+        }
+        const indexStr = index.toString();
+        if (index !== -1) {
+            res.send({ message: index.toString() })
+        } else {
+            res.send({ message: "Wrong username/password combination"});
+        }
+    });
+});
+
+// app.get('/api/login', (req, res) => {
+//     const sqlSelect = "SELECT * FROM users";
+//     pool.query(sqlSelect, (err, result) => {
+//         res.send(result["rows"]);
+//     })
+// })
 
 app.listen(3001, () => {
     console.log("running server");

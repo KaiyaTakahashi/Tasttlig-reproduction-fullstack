@@ -33,12 +33,6 @@ const QuestionFormView = ({ open, onClose }) => {
         }).then(() => {
             alert('successful insert');
         });
-        Axios.post('http://localhost:3001/api/members', {
-            name: data["name"],
-            email: data["email"]
-        }).then(() => {
-            alert('You are also signed in');
-        })
     };
 
     if (!open) {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import '../styling/style.css'
 import Axios from 'axios';
@@ -6,6 +6,8 @@ import Axios from 'axios';
 Axios.defaults.withCredentials = true;
 
 const SignUpView = () => {
+
+    const [loginMessage, setLoginMessage] = useState("");
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const { register: register2, handleSubmit: handleSubmit2, formState: { errors: errors2 } } = useForm();
@@ -22,8 +24,11 @@ const SignUpView = () => {
             username: data["usernameLog"],
             password: data["passwordLog"]
         }).then((response) => {
-            console.log(response);
-            alert("You are logged in")
+            if (response["data"]["message"] === undefined) {
+                setLoginMessage("You are " + response["data"]["rows"][0]["username"]);
+            } else {
+                setLoginMessage(response["data"]["message"]);
+            }
         });
     };
 
@@ -43,6 +48,7 @@ const SignUpView = () => {
                         defaultValue="" {...register("password")}
                         placeholder="password"
                         className='form-text-field'
+                        type='password'
                     />
                     <input type="submit"></input>
                 </form>
@@ -57,9 +63,11 @@ const SignUpView = () => {
                         defaultValue="" {...register2("passwordLog")}
                         placeholder="password"
                         className='form-text-field'
+                        type='password'
                     />
                     <input type="submit"></input>
                 </form>
+                <h2>{loginMessage}</h2>
             </body>
         </div>
     );

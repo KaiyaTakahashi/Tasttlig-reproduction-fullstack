@@ -66,14 +66,19 @@ app.get("/api/get", (req, res) => {
 })
 
 app.post('/api/register', (req, res) => {
-    const username = req.body.username;
-    const password = req.body.password;
+    const nameRegister = req.body.username;
+    const passwordRegister = req.body.password;
     const sqlInsert = "INSERT INTO users (username, password) VALUES ($1, $2)"
-    pool.query(sqlInsert, [username, password], (err, result) => {
+    bcrypt.hash(passwordRegister, saltRounds, (err, hash) => {
         if (err) {
-            console.log(err)
-        };
-        res.send(result);
+            console.log(err);
+        }
+        pool.query(sqlInsert, [nameRegister, hash], (err, result) => {
+            if (err) {
+                console.log(err)
+            };
+            res.send(result);
+        });
     });
 });
 
@@ -85,41 +90,30 @@ app.get('/api/register', (req, res) => {
 });
 
 app.post('/api/login', (req, res) => {
-    const username = req.body.username;
-    const password = req.body.password;
-    // const sqlSelect = "SELECT * FROM users WHERE username = $1 AND password = $2";
-    const sqlSelect = "SELECT * FROM users";
-    pool.query(sqlSelect, (err, result) => {
-        // if (reuslt["rows"].length > 0) {
-        //     res.send(result);
-        // } else {
-        //     res.send({ message: "Wrong username/password combination"});
-        // }
-        // if (err) {
-        //     res.send({ err: err });
-        // }
-
-        var index = -1;
-        for (let i = 0; i < result["rows"].length; i++) {
-            if (result["rows"][i]["username"] === username && result["rows"][i]["password"] === password) {
-                index = i
-            }
+    const usernameLog = req.body.username;
+    const passwordLog = req.body.password;
+    const query = {
+        name: 'users',
+        text: 'SELECT * FROM users WHERE username = $1',
+        values: [usernameLog],
+    }
+    pool.query(query, (err, result) => {
+        if (err) {
+            console.log(err)
         }
-        const indexStr = index.toString();
-        if (index !== -1) {
-            res.send({ message: index.toString() })
+        if (result["rows"].length > 0) {
+            bcrypt.compare(passwordLog, result["rows"][0]["password"], (err, bcryptRes) => {
+                if (bcryptRes) {
+                    res.send(result);
+                } else {
+                    res.send({ message: "Wrong username/password combination!"});
+                }
+            })
         } else {
-            res.send({ message: "Wrong username/password combination"});
+            res.send({ message: "User doesn't exist" });
         }
-    });
+    })
 });
-
-// app.get('/api/login', (req, res) => {
-//     const sqlSelect = "SELECT * FROM users";
-//     pool.query(sqlSelect, (err, result) => {
-//         res.send(result["rows"]);
-//     })
-// })
 
 app.listen(3001, () => {
     console.log("running server");

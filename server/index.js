@@ -104,6 +104,8 @@ app.post('/api/login', (req, res) => {
         if (result["rows"].length > 0) {
             bcrypt.compare(passwordLog, result["rows"][0]["password"], (err, bcryptRes) => {
                 if (bcryptRes) {
+                    req.session.user = result
+                    console.log(req.session.user);
                     res.send(result);
                 } else {
                     res.send({ message: "Wrong username/password combination!"});
@@ -113,6 +115,14 @@ app.post('/api/login', (req, res) => {
             res.send({ message: "User doesn't exist" });
         }
     })
+});
+
+app.get('/api/login', (req, res) => {
+    if (req.session.user) {
+        res.send({ loggedIn: true, user: req.session.user });
+    } else {
+        res.send({ loggedIn: false });
+    }
 });
 
 app.listen(3001, () => {

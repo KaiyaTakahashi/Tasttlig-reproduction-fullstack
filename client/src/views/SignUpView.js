@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import '../styling/style.css'
 import Axios from 'axios';
@@ -25,12 +25,22 @@ const SignUpView = () => {
             password: data["passwordLog"]
         }).then((response) => {
             if (response["data"]["message"] === undefined) {
-                setLoginMessage("You are " + response["data"]["rows"][0]["username"]);
+                // setLoginMessage("You are " + response["data"]["rows"][0]["username"]);
+                setLoginMessage("You are " + response.data.rows[0].username);
             } else {
-                setLoginMessage(response["data"]["message"]);
+                setLoginMessage(response.data.message);
             }
         });
     };
+
+    useEffect(() => {
+        Axios.get('http://localhost:3001/api/login').then((response) => {
+            console.log(response);
+            if (response["data"]["loggedIn"]) {
+                setLoginMessage("Hello " + response["data"]["user"]["rows"][0]["username"]);
+            }
+        })
+    }, []);
 
     return (
         <div>

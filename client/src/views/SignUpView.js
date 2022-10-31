@@ -15,7 +15,8 @@ const SignUpView = () => {
         Axios.post('http://localhost:3001/api/register', {
             username: data["username"],
             password: data["password"]
-        }).then(() => {
+        }).then((response) => {
+            console.log(response)
             alert("You are registered!")
         });
     };
@@ -24,9 +25,11 @@ const SignUpView = () => {
             username: data["usernameLog"],
             password: data["passwordLog"]
         }).then((response) => {
-            if (response["data"]["message"] === undefined) {
-                // setLoginMessage("You are " + response["data"]["rows"][0]["username"]);
-                setLoginMessage("You are " + response.data.rows[0].username);
+            console.log(response)
+            if (response.data.auth) {
+                setLoginMessage("Hello" + data.usernameLog + "You are logged in");
+                localStorage.setItem("accessToken", response.data.accessToken);
+                localStorage.setItem("refreshToken", response.data.refreshToken);
             } else {
                 setLoginMessage(response.data.message);
             }
@@ -34,10 +37,14 @@ const SignUpView = () => {
     };
 
     useEffect(() => {
-        Axios.get('http://localhost:3001/api/login').then((response) => {
+        Axios.get('http://localhost:3001/api/authentication', {
+            headers: {
+                "x-access-token": localStorage.getItem("accessToken")
+            },
+        }).then((response) => {
             console.log(response);
-            if (response["data"]["loggedIn"]) {
-                setLoginMessage("Hello " + response["data"]["user"]["rows"][0]["username"]);
+            if (response.data.auth) {
+                setLoginMessage(response.data.message)
             }
         })
     }, []);

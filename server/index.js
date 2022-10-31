@@ -6,6 +6,8 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 const app = express();
 
@@ -101,28 +103,56 @@ app.post('/api/login', (req, res) => {
         if (err) {
             console.log(err)
         }
-        if (result["rows"].length > 0) {
+        if (result.rows.length > 0) {
             bcrypt.compare(passwordLog, result["rows"][0]["password"], (err, bcryptRes) => {
                 if (bcryptRes) {
+                    const id = result.rows[0].id;
+                    const accessToken = jwt.sign({id}, process.env.ACCESS_TOKEN_SECRET, {
+                        expiresIn: 60,
+                    });
+                    const refreshToken = jwt.sign({id}, process.env.REFRESH_TOKEN_SECRET);
+                    
                     req.session.user = result
-                    console.log(req.session.user);
-                    res.send(result);
+                    res.json({ auth: true, accessToken: accessToken, refreshToken: refreshToken, result: result })
                 } else {
-                    res.send({ message: "Wrong username/password combination!"});
+                    res.json({ auth: false, message: "Wrong username/password combination!"});
                 }
             })
         } else {
-            res.send({ message: "User doesn't exist" });
+            res.send({ auth: false, message: "User doesn't exist" });
         }
     })
 });
 
-app.get('/api/login', (req, res) => {
-    if (req.session.user) {
-        res.send({ loggedIn: true, user: req.session.user });
+const authenticateToken = (req, res, next) => {
+    const token = req.header("x-access-token");
+    if (!token) {
+        res.send({ message: "you don't have a token"});
     } else {
-        res.send({ loggedIn: false });
+        jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
+            if (err) {
+                res.json({ auth: false, message: "invalid token" })
+            } else {
+                req.userId = decoded.id;
+                next();
+            }
+        })
     }
+}
+
+app.get('/api/authentication', authenticateToken, (req, res) => {
+    const query = {
+        name: 'users',
+        text: 'SELECT * FROM users WHERE id = $1',
+        values: [req.userId],
+    }
+    pool.query(query, (err, result) => {
+        if (err) {
+            res.send({ message: "error occurs"})
+        } else {
+            res.send({ auth: true, message: "Hello " + result.rows[0].username + ". you are authenticated" })
+        }
+    })
 });
 
 app.listen(3001, () => {

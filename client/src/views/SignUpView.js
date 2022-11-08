@@ -27,9 +27,10 @@ const SignUpView = () => {
         }).then((response) => {
             console.log(response)
             if (response.data.auth) {
-                setLoginMessage("Hello" + data.usernameLog + "You are logged in");
+                setLoginMessage("Hello " + data.usernameLog + " You are logged in");
                 localStorage.setItem("accessToken", response.data.accessToken);
                 localStorage.setItem("refreshToken", response.data.refreshToken);
+                localStorage.setItem("username", data["usernameLog"]);
             } else {
                 setLoginMessage(response.data.message);
             }
@@ -39,12 +40,21 @@ const SignUpView = () => {
     useEffect(() => {
         Axios.get('http://localhost:3001/api/authentication', {
             headers: {
-                "x-access-token": localStorage.getItem("accessToken")
+                "x-access-token": localStorage.getItem("accessToken"),
             },
         }).then((response) => {
             console.log(response);
             if (response.data.auth) {
                 setLoginMessage(response.data.message)
+            } else {
+                Axios.get('http://localhost:3001/api/refresh', {
+                    headers: {
+                        "refresh-token": localStorage.getItem("refreshToken"),
+                        "username": localStorage.getItem("username"),
+                    },
+                }).then((res) => {
+
+                })
             }
         })
     }, []);

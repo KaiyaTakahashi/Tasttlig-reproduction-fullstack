@@ -125,13 +125,13 @@ app.post('/api/login', (req, res) => {
 });
 
 const authenticateToken = (req, res, next) => {
-    const token = req.header("x-access-token");
-    if (!token) {
+    const accessToken = req.header("x-access-token");
+    if (!accessToken) {
         res.send({ message: "you don't have a token"});
     } else {
-        jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
+        jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
             if (err) {
-                res.json({ auth: false, message: "invalid token" })
+                res.json({ auth: false, message: "your token is expired." });
             } else {
                 req.userId = decoded.id;
                 next();
@@ -154,6 +154,21 @@ app.get('/api/authentication', authenticateToken, (req, res) => {
         }
     })
 });
+
+app.get("/api/refresh", (req, res) => {
+    const refreshToken = req.body.header["refresh-token"];
+    if (!refreshToken) {
+
+    }
+    jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, decoded) => {
+        if (err) {
+            res.send({ auth: false, message: "Invalid refresh token"})
+        } else {
+            bcrypt.compare()
+            jwt.sign()
+        }
+    })
+})
 
 app.listen(3001, () => {
     console.log("running server");
